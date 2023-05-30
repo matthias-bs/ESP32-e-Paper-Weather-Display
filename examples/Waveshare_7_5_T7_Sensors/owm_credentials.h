@@ -1,6 +1,12 @@
 // Change to your WiFi credentials
-const char* ssid     = "your_SSID";     // WiFi SSID to connect to
-const char* password = "your_PASSWORD"; // WiFi password needed for the SSID
+const char* ssid0     = "your_SSID0";     // WiFi SSID to connect to
+const char* password0 = "your_PASSWORD0"; // WiFi password needed for the SSID
+
+const char* ssid1     = "your_SSID1";     // WiFi SSID to connect to
+const char* password1 = "your_PASSWORD1"; // WiFi password needed for the SSID
+
+const char* ssid2     = "your_SSID2";     // WiFi SSID to connect to
+const char* password2 = "your_PASSWORD2"; // WiFi password needed for the SSID
 
 // Domain Name Server - separate bytes by comma!
 #define MY_DNS 192,168,0,1
