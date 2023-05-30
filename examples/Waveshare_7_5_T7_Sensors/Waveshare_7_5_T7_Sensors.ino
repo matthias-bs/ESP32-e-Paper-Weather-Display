@@ -2296,7 +2296,7 @@ uint8_t StartWiFi() {
   WiFi.setAutoConnect(true);
   WiFi.setAutoReconnect(true);
   //WiFi.begin(ssid, password);
-  unsigned long start = millis();
+  //unsigned long start = millis();
   uint8_t connectionStatus;
   connectionStatus = wifiMulti.run();
   /*
