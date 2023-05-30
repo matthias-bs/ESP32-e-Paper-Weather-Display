@@ -19,7 +19,6 @@
 */
 
 // Functions for drawing weather symbols; moved from main sketch to separate file.
-
 #define Large  17           // For icon drawing, needs to be odd number for best effect
 #define Small  6            // For icon drawing, needs to be odd number for best effect
 #include <string>
@@ -264,7 +263,7 @@ void CloudCover(int x, int y, int CCover) {
   addcloud(x + 3, y - 3, Small * 0.5, 2); // Cloud top right
   addcloud(x, y,         Small * 0.5, 2); // Main cloud
   u8g2Fonts.setFont(u8g2_font_helvB08_tf);
-  drawString(x + 15, y - 5, String(CCover) + "%", LEFT);
+  drawString(x + 25, y - 5, String(CCover) + "%", LEFT);
 }
 //#########################################################################################
 void Visibility(int x, int y, String Visi) {
@@ -296,4 +295,3 @@ void addmoon(int x, int y, int scale, bool IconSize) {
     display.fillCircle(x - 18, y - 15, scale * 1.6, GxEPD_WHITE);
   }
 }
- 
