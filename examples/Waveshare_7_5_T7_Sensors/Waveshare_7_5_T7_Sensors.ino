@@ -89,7 +89,7 @@
 #define HIST_UPDATE_TOL 5
 
 //#define MITHERMOMETER_EN         //!< Enable MiThermometer   (BLE sensors)
-#define THEENGSDECODER_EN          //!< Enable Theengs Decoder (BLE sensors)
+//#define THEENGSDECODER_EN          //!< Enable Theengs Decoder (BLE sensors)
 #define BME280_EN                  //!< Enable BME280 T/H/p-sensor (I2C)
 #define SCD4X_EN                   //!< Enable SCD4x CO2-sensor (I2C)
 //#define WATERTEMP_EN               //!< Enable Wather Temperature Display (MQTT)
