@@ -1608,16 +1608,18 @@ void DisplayLocalWeather(const unsigned char *status_bitmap) {
     DisplayDateTime(90, 225);
 #ifdef SCD4X_EN    
     const int y1 = 125;
-#else
+    const int y2 = 210;
+#elsif defined(BME280_EN)
     const int y1 = 178;
 #endif
-    const int y2 = 210;
     display.drawBitmap(5, 25, epd_bitmap_local, 220, 165, GxEPD_BLACK);
     display.drawRect(4, 24, 222, 167, GxEPD_BLACK);
     display.drawBitmap(240, 45, epd_bitmap_temperatur_aussen, 64, 48, GxEPD_BLACK);
     display.drawBitmap(438, 45, epd_bitmap_feuchte_aussen, 64, 48, GxEPD_BLACK);
+#ifdef BME280_EN
     display.drawBitmap(240, y1, epd_bitmap_temperatur_innen, 64, 48, GxEPD_BLACK);
     display.drawBitmap(438, y1, epd_bitmap_feuchte_innen, 64, 48, GxEPD_BLACK);
+#endif
     display.drawBitmap(660, 20, epd_bitmap_barometer, 80, 64, GxEPD_BLACK);
 #ifdef SCD4X_EN    
     display.drawBitmap(240, y2, epd_bitmap_co2_innen, 48, 48, GxEPD_BLACK);
