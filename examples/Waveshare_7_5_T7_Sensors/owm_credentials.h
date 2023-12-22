@@ -23,6 +23,7 @@ const char *MQTT_HOST = "192.168.0.10";
 const char *MQTT_USER = "";   // leave blank if no credentials used
 const char *MQTT_PASS = ""; // leave blank if no credentials used
 const char *MQTT_SUB_IN = "/esp8266/sensor2_temperature_1";
+const char *MQTT_SUB_IN2 = "/esp8266/sensor2_humidity_1"; // ???
 
 // MQTT connection for publishing (local sensor data)
 const int   MQTT_PORT_P = 1883;
