@@ -2059,7 +2059,8 @@ void DisplayAstronomySection(int x, int y) {
 void DisplayOWMAttribution(int x, int y) {
   display.drawRect(x, y + 16, 219, 65, GxEPD_BLACK);
   u8g2Fonts.setFont(u8g2_font_helvB10_tf);
-  drawString(x + 8, y + 24, "Garagendach", LEFT);
+  // Concatenate a constant string and a String converted from float (with one decimal)
+  drawString(x + 8, y + 24, String("Garagendach: ") + String(MqttSensors.air_temp_c, 1), LEFT);
   //drawString(x + 8, y + 44, "https://openweathermap.org/", LEFT);
 }
 
