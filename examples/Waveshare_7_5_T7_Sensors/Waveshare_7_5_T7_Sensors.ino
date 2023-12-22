@@ -91,7 +91,7 @@
 //#define MITHERMOMETER_EN         //!< Enable MiThermometer   (BLE sensors)
 //#define THEENGSDECODER_EN          //!< Enable Theengs Decoder (BLE sensors)
 #define BME280_EN                  //!< Enable BME280 T/H/p-sensor (I2C)
-#define SCD4X_EN                   //!< Enable SCD4x CO2-sensor (I2C)
+//#define SCD4X_EN                   //!< Enable SCD4x CO2-sensor (I2C)
 //#define WATERTEMP_EN               //!< Enable Wather Temperature Display (MQTT)
 #define MITHERMOMETER_BATTALERT 6  //!< Low battery alert threshold [%]
 #define WATER_TEMP_INVALID -30.0   //!< Water temperature invalid marker [°C]
