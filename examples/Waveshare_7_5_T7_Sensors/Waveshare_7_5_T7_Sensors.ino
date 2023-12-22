@@ -843,7 +843,7 @@ void mqttMessageCb(String &topic, String &payload) {
   if (topic == MQTT_SUB_IN) {
     log_d("MQTT: Temperature received");
     sscanf(payload.c_str(), " %f", &MqttSensors.air_temp_c);
-  } else if {topic == MQTT_SUB_IN2) {
+  } else if (topic == MQTT_SUB_IN2) {
     log_d("MQTT: Humidity received");
     sscanf(payload.c_str(), " %f", &MqttSensors.humidity);
   }
