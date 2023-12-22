@@ -1619,8 +1619,8 @@ void DisplayLocalWeather(const unsigned char *status_bitmap) {
 #ifdef BME280_EN
     display.drawBitmap(240, y1, epd_bitmap_temperatur_innen, 64, 48, GxEPD_BLACK);
     display.drawBitmap(438, y1, epd_bitmap_feuchte_innen, 64, 48, GxEPD_BLACK);
-#endif
     display.drawBitmap(660, 20, epd_bitmap_barometer, 80, 64, GxEPD_BLACK);
+#endif
 #ifdef SCD4X_EN    
     display.drawBitmap(240, y2, epd_bitmap_co2_innen, 48, 48, GxEPD_BLACK);
 #endif
@@ -1653,6 +1653,7 @@ void DisplayLocalWeather(const unsigned char *status_bitmap) {
       display.drawBitmap(528, 47, epd_bitmap_bluetooth_disabled, 40, 40, GxEPD_BLACK);
     }
 
+  #if defined(BME280_EN)
     // Indoor sensor(s)
     // Temperature, humidity, pressure
     if (LocalSensors.i2c_thpsensor[0].valid) {
@@ -1670,6 +1671,7 @@ void DisplayLocalWeather(const unsigned char *status_bitmap) {
       // No pressure
       display.drawBitmap(670, 90, epd_bitmap_bolt, 40, 40, GxEPD_BLACK);
     }
+#endif
 
 #if defined(SCD4X_EN)
     // CO2
