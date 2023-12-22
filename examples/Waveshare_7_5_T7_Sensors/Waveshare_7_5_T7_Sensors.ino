@@ -922,7 +922,7 @@ bool MqttConnect(WiFiClient &net, MQTTClient &MqttClient) {
 
   MqttClient.onMessage(mqttMessageCb);
 
-  if (!MqttClient.subscribe(MQTT_SUB_IN) || !qttClient.subscribe(MQTT_SUB_IN2)) {
+  if (!MqttClient.subscribe(MQTT_SUB_IN) || !MqttClient.subscribe(MQTT_SUB_IN2)) {
     log_i("MQTT subscription failed!");
     return false;
   }
