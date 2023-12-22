@@ -844,8 +844,10 @@ void mqttMessageCb(String &topic, String &payload) {
     log_d("MQTT: Temperature received");
     sscanf(payload.c_str(), " %f", &MqttSensors.air_temp_c);
   } else if (topic == MQTT_SUB_IN2) {
-    log_d("MQTT: Humidity received");
-    sscanf(payload.c_str(), " %d", &MqttSensors.humidity);
+    log_d("MQTT: Humidity received)";
+    unsigned int humidity;
+    sscanf(payload.c_str(), " %u", &humidity);
+    MqttSensors.humidity = (uint8_t)humidity;
   }
   mqttMessageReceived = true;
   log_d("Payload size: %d", payload.length());
