@@ -836,6 +836,13 @@ bool HistoryUpdateDue(void) {
  * <code>MqttBuf</code>.
  */
 void mqttMessageCb(String &topic, String &payload) {
+  if (topic == MQTT_SUB_IN) {
+    log_d("MQTT: Temperature received");
+    sscanf(payload.c_str(), " %f", &MqttSensors.air_temp_c);
+  } else if {topic == MQTT_SUB_IN2) {
+    log_d("MQTT: Humidity received)";
+    sscanf(payload.c_str(), " %f", &MqttSensors.humidity);
+  }
   mqttMessageReceived = true;
   log_d("Payload size: %d", payload.length());
 #ifndef SIMULATE_MQTT
@@ -909,7 +916,7 @@ bool MqttConnect(WiFiClient &net, MQTTClient &MqttClient) {
 
   MqttClient.onMessage(mqttMessageCb);
 
-  if (!MqttClient.subscribe(MQTT_SUB_IN)) {
+  if (!MqttClient.subscribe(MQTT_SUB_IN) || !qttClient.subscribe(MQTT_SUB_IN2)) {
     log_i("MQTT subscription failed!");
     return false;
   }
@@ -1149,7 +1156,7 @@ void GetMqttData(WiFiClient &net, MQTTClient &MqttClient) {
   */
 
   // Convert temperature value from string (with leading spaces) to float
-  sscanf(MqttBuf, " %f", &MqttSensors.air_temp_c);
+  //sscanf(MqttBuf, " %f", &MqttSensors.air_temp_c);
   
   /*
   MqttSensors.air_temp_c = payload["air_temp_c"];
