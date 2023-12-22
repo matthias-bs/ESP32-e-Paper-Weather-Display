@@ -1118,6 +1118,8 @@ void GetMqttData(WiFiClient &net, MQTTClient &MqttClient) {
   MqttClient.disconnect();
   log_d("%s", MqttBuf);
 
+  // Everything between /* */ can be deleted...
+  /*
   log_d("Creating JSON object...");
 
   // allocate the JsonDocument
@@ -1144,7 +1146,12 @@ void GetMqttData(WiFiClient &net, MQTTClient &MqttClient) {
 
   // uplink_message_decoded_payload_bytes -> payload
   JsonObject payload = uplink_message["decoded_payload"]["bytes"];
+  */
 
+  // Convert temperature value from string (with leading spaces) to float
+  sscanf(MqttBuf, " %f", &MqttSensors.air_temp_c);
+  
+  /*
   MqttSensors.air_temp_c = payload["air_temp_c"];
   MqttSensors.humidity = payload["humidity"];
   MqttSensors.indoor_temp_c = payload["indoor_temp_c"];
@@ -1161,14 +1168,21 @@ void GetMqttData(WiFiClient &net, MQTTClient &MqttClient) {
   MqttSensors.wind_avg_meter_sec = payload["wind_avg_meter_sec"];
   MqttSensors.wind_direction_deg = payload["wind_direction_deg"];
   MqttSensors.wind_gust_meter_sec = payload["wind_gust_meter_sec"];
-
+  
   JsonObject status = payload["status"];
   MqttSensors.status.ble_ok = status["ble_ok"];
   MqttSensors.status.s1_batt_ok = status["s1_batt_ok"];
   MqttSensors.status.s1_dec_ok = status["s1_dec_ok"];
   MqttSensors.status.ws_batt_ok = status["ws_batt_ok"];
   MqttSensors.status.ws_dec_ok = status["ws_dec_ok"];
+  */
+  MqttSensors.status.ble_ok = false;
+  MqttSensors.status.s1_batt_ok = false;
+  MqttSensors.status.s1_dec_ok = false;
+  MqttSensors.status.ws_batt_ok = false;
+  MqttSensors.status.ws_dec_ok = true;
 
+  /*
   // Sanity checks
   if (MqttSensors.humidity == 0) {
     MqttSensors.status.ws_dec_ok = false;
@@ -1183,6 +1197,7 @@ void GetMqttData(WiFiClient &net, MQTTClient &MqttClient) {
   if (!MqttSensors.rain_day_valid) {
     MqttSensors.rain_day = 0;
   }
+  */
 
   log_i("MQTT data updated: %d", MqttSensors.valid ? 1 : 0);
 }
@@ -2043,9 +2058,9 @@ void DisplayAstronomySection(int x, int y) {
  */
 void DisplayOWMAttribution(int x, int y) {
   display.drawRect(x, y + 16, 219, 65, GxEPD_BLACK);
-  u8g2Fonts.setFont(u8g2_font_helvB08_tf);
-  drawString(x + 8, y + 24, "Weather data provided by OpenWeather", LEFT);
-  drawString(x + 8, y + 44, "https://openweathermap.org/", LEFT);
+  u8g2Fonts.setFont(u8g2_font_helvB10_tf);
+  drawString(x + 8, y + 24, "Garagendach", LEFT);
+  //drawString(x + 8, y + 44, "https://openweathermap.org/", LEFT);
 }
 
 
