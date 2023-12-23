@@ -224,7 +224,8 @@ RTC_DATA_ATTR bool touchMidTrig = false;   //!< Flag: Middle touch sensor has be
 NimBLEScan *pBLEScan;
 #endif
 
-bool mqttMessageReceived = false;  //!< Flag: MQTT message has been received
+bool mqttTemperatureReceived = false; //!< Flag: MQTT temperature message has been received
+bool mqttHumidityReceived = false; //!< Flag: MQTT humidity message has been received
 
 //################ PROGRAM VARIABLES and OBJECTS ################
 
@@ -836,20 +837,21 @@ bool HistoryUpdateDue(void) {
 /**
  * \brief MQTT message reception callback function
  * 
- * Sets the flag <code>mqttMessageReceived</code> and copies the received message to
- * <code>MqttBuf</code>.
+ * Sets the flags <code>mqttTemperatureReceived</code>/<code>mqttHumidityReceived</code> and copies the received values to
+ * <code>MqttSensors</code>.
  */
 void mqttMessageCb(String &topic, String &payload) {
   if (topic == MQTT_SUB_IN) {
     log_d("MQTT: Temperature received");
     sscanf(payload.c_str(), " %f", &MqttSensors.air_temp_c);
+    mqttTemperatureReceived = true;
   } else if (topic == MQTT_SUB_IN2) {
     log_d("MQTT: Humidity received");
     unsigned int humidity;
     sscanf(payload.c_str(), " %u", &humidity);
     MqttSensors.humidity = (uint8_t)humidity;
+    mqttHumidityReceived = true;
   }
-  mqttMessageReceived = true;
   log_d("Payload size: %d", payload.length());
 #ifndef SIMULATE_MQTT
   strncpy(MqttBuf, payload.c_str(), payload.length());
@@ -1092,15 +1094,17 @@ void GetMqttData(WiFiClient &net, MQTTClient &MqttClient) {
 #ifndef SIMULATE_MQTT
   unsigned long start = millis();
   int count = 0;
-  while (!mqttMessageReceived) {
+  while (!(mqttTemperatureReceived & mqttHumidityReceived)) {
     MqttClient.loop();
     delay(10);
     if (count++ == 1000) {
       log_d(".");
       count = 0;
     }
-    if (mqttMessageReceived)
+    if (mqttTemperatureReceived & mqttHumidityReceived) {
+      MqttSensors.valid = true;
       break;
+    }
     if (!MqttClient.connected()) {
       MqttConnect(net, MqttClient);
     }
@@ -1130,88 +1134,17 @@ void GetMqttData(WiFiClient &net, MQTTClient &MqttClient) {
   log_i("done!");
   MqttClient.disconnect();
   log_d("%s", MqttBuf);
-
-  // Everything between /* */ can be deleted...
-  /*
-  log_d("Creating JSON object...");
-
-  // allocate the JsonDocument
-  //StaticJsonDocument<MQTT_PAYLOAD_SIZE> doc;
-  DynamicJsonDocument doc(MQTT_PAYLOAD_SIZE);
-
-  // Deserialize the JSON document
-  DeserializationError error = deserializeJson(doc, MqttBuf, MQTT_PAYLOAD_SIZE);
-
-  // Test if parsing succeeds.
-  if (error) {
-    log_i("deserializeJson() failed: %s", error.c_str());
-    return;
-  } else {
-    log_d("Done!");
-  }
-  MqttSensors.valid = true;
-
-  const char *received_at = doc["received_at"];
-  strncpy(MqttSensors.received_at, received_at, 30);
-  //MqttSensors.received_at   = received_at;
-  //MqttSensors.received_at   = doc["received_at"].as<String>();
-  JsonObject uplink_message = doc["uplink_message"];
-
-  // uplink_message_decoded_payload_bytes -> payload
-  JsonObject payload = uplink_message["decoded_payload"]["bytes"];
-  */
-
-  // Convert temperature value from string (with leading spaces) to float
-  //sscanf(MqttBuf, " %f", &MqttSensors.air_temp_c);
   
-  /*
-  MqttSensors.air_temp_c = payload["air_temp_c"];
-  MqttSensors.humidity = payload["humidity"];
-  MqttSensors.indoor_temp_c = payload["indoor_temp_c"];
-  MqttSensors.indoor_humidity = payload["indoor_humidity"];
-  MqttSensors.battery_v = payload["battery_v"];
-  MqttSensors.rain_day = payload["rain_day"];
-  MqttSensors.rain_hr = payload["rain_hr"];
-  MqttSensors.rain_mm = payload["rain_mm"];
-  MqttSensors.rain_month = payload["rain_mon"];
-  MqttSensors.rain_week = payload["rain_week"];
-  MqttSensors.soil_moisture = payload["soil_moisture"];
-  MqttSensors.soil_temp_c = payload["soil_temp_c"];
-  MqttSensors.water_temp_c = payload["water_temp_c"];
-  MqttSensors.wind_avg_meter_sec = payload["wind_avg_meter_sec"];
-  MqttSensors.wind_direction_deg = payload["wind_direction_deg"];
-  MqttSensors.wind_gust_meter_sec = payload["wind_gust_meter_sec"];
-  
-  JsonObject status = payload["status"];
-  MqttSensors.status.ble_ok = status["ble_ok"];
-  MqttSensors.status.s1_batt_ok = status["s1_batt_ok"];
-  MqttSensors.status.s1_dec_ok = status["s1_dec_ok"];
-  MqttSensors.status.ws_batt_ok = status["ws_batt_ok"];
-  MqttSensors.status.ws_dec_ok = status["ws_dec_ok"];
-  */
   MqttSensors.status.ble_ok = false;
   MqttSensors.status.s1_batt_ok = false;
   MqttSensors.status.s1_dec_ok = false;
   MqttSensors.status.ws_batt_ok = false;
   MqttSensors.status.ws_dec_ok = true;
-
-  /*
-  // Sanity checks
-  if (MqttSensors.humidity == 0) {
-    MqttSensors.status.ws_dec_ok = false;
-  }
-  MqttSensors.rain_hr_valid = (MqttSensors.rain_hr >= 0) && (MqttSensors.rain_hr < 300);
-  MqttSensors.rain_day_valid = (MqttSensors.rain_day >= 0) && (MqttSensors.rain_day < 1800);
-
-  // If not valid, set value to zero to avoid any problems with auto-scale etc.
-  if (!MqttSensors.rain_hr_valid) {
-    MqttSensors.rain_hr = 0;
-  }
-  if (!MqttSensors.rain_day_valid) {
-    MqttSensors.rain_day = 0;
-  }
-  */
-
+  
+  // Clear flags for next reception
+  mqttTemperatureReceived = false;
+  mqttHumidityReceived = false;
+  
   log_i("MQTT data updated: %d", MqttSensors.valid ? 1 : 0);
 }
 
