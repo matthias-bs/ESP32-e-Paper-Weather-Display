@@ -8,10 +8,13 @@ const String TXT_CONDITIONS           = "Aktuelles Wetter";
 const String TXT_DAYS                 = "(Tage)";
 const String TXT_HOURS                = "(Stunden)";
 const String TXT_TEMPERATURES         = "Temperatur";
+const String TXT_TEMPERATURES_IN      = "Innentemperatur";
+const String TXT_TEMPERATURES_OUT     = "Außentemperatur";
 const String TXT_TEMPERATURE_C        = "Temperatur [°C]";
 const String TXT_TEMPERATURE_F        = "Temperatur [°F]";
 const String TXT_HUMIDITY_PERCENT     = "Luftfeuchte [%]";
-const String TXT_RELATIVE_HUMIDITY    = "rF";
+const String TXT_HUMIDITY_PERCENT_IN  = "Innen-Luftfeuchte [%]";
+const String TXT_HUMIDITY_PERCENT_OUT = "Außen-Luftfeuchte [%]";
 
 //Luftdruck
 const String TXT_PRESSURE         = "Luftdruck";
