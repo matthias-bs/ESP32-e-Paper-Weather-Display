@@ -20,7 +20,8 @@ void Convert_Readings_to_Imperial() {
 bool DecodeWeather(WiFiClient& json, String Type) {
   Serial.print(F("\nCreating object...and "));
   // allocate the JsonDocument
-  DynamicJsonDocument doc(35 * 1024);
+  DynamicJsonDocument doc(25 * 1024);
+  //StaticJsonDocument<25 * 1024> doc;
   // Deserialize the JSON document
   DeserializationError error = deserializeJson(doc, json);
   // Test if parsing succeeds.
@@ -108,8 +109,9 @@ String ConvertUnixTime(int unix_time) {
   return output;
 }
 //#########################################################################################
-//WiFiClient client; // wifi client object
+//extern WiFiClient client; // wifi client object
 
+//bool obtain_wx_data(WiFiClient& client, const String& RequestType) {
 bool obtain_wx_data(WiFiClient& client, const String& RequestType) {
   const String units = (Units == "M" ? "metric" : "imperial");
   client.stop(); // close connection before sending a new request
@@ -130,7 +132,7 @@ bool obtain_wx_data(WiFiClient& client, const String& RequestType) {
   }
   else
   {
-    Serial.printf("connection failed, error: %s", http.errorToString(httpCode).c_str());
+    Serial.printf("connection failed, error: %s\n", http.errorToString(httpCode).c_str());
     client.stop();
     http.end();
     return false;
