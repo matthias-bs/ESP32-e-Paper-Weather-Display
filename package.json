@@ -27,7 +27,7 @@
     "arduino-mqtt": "256dpi/arduino-mqtt#semver:^2.5.2",
     "ArduinoJson": "bblanchon/ArduinoJson#semver:^7.2.0",
     "pocketBME280": "angrest/pocketBME280#semver:^1.2.4",
-    "NimBLE-Arduino": "h2zero/NimBLE-Arduino#semver:^1.4.2",
+    "NimBLE-Arduino": "h2zero/NimBLE-Arduino#semver:^2.2.3",
     "Sensirion I2C SCD4x": "Sensirion/arduino-i2c-scd4x#semver:^0.4.0",
     "Sensirion Core": "Sensirion/arduino-core#semver:^0.7.1"
   }
