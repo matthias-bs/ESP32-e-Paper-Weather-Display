@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ESP32-e-Paper-Weather-Display: Class Index</title>
+<title>ESP32-e-Paper-Weather-Display: MqttHistQData Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,7 +64,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('classes.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('struct_mqtt_hist_q_data.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -90,32 +90,37 @@ $(document).ready(function(){initNavTree('classes.html',''); initResizable(); })
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Class Index</div></div>
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="struct_mqtt_hist_q_data-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">MqttHistQData Struct Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="qindex"><a class="qindex" href="#letter_B">B</a>&#160;|&#160;<a class="qindex" href="#letter_F">F</a>&#160;|&#160;<a class="qindex" href="#letter_L">L</a>&#160;|&#160;<a class="qindex" href="#letter_M">M</a>&#160;|&#160;<a class="qindex" href="#letter_S">S</a></div>
-<div class="classindex">
-<dl class="classindex even">
-<dt class="alphachar"><a id="letter_B" name="letter_B">B</a></dt>
-<dd><a class="el" href="struct_ble_data_s.html">BleDataS</a></dd><dd><a class="el" href="class_ble_sensors.html">BleSensors</a></dd></dl>
-<dl class="classindex odd">
-<dt class="alphachar"><a id="letter_F" name="letter_F">F</a></dt>
-<dd><a class="el" href="struct_forecast__record__type.html">Forecast_record_type</a></dd></dl>
-<dl class="classindex even">
-<dt class="alphachar"><a id="letter_L" name="letter_L">L</a></dt>
-<dd><a class="el" href="struct_local_hist_q_data.html">LocalHistQData</a></dd><dd><a class="el" href="class_local_interface.html">LocalInterface</a></dd><dd><a class="el" href="struct_local_s.html">LocalS</a></dd></dl>
-<dl class="classindex odd">
-<dt class="alphachar"><a id="letter_M" name="letter_M">M</a></dt>
-<dd><a class="el" href="struct_mqtt_hist_q_data.html">MqttHistQData</a></dd><dd><a class="el" href="class_mqtt_interface.html">MqttInterface</a></dd><dd><a class="el" href="struct_mqtt_s.html">MqttS</a></dd></dl>
-<dl class="classindex even">
-<dt class="alphachar"><a id="letter_S" name="letter_S">S</a></dt>
-<dd><a class="el" href="class_ble_sensors_callbacks_1_1_scan_callbacks.html">ScanCallbacks</a> (BleSensorsCallbacks)</dd></dl>
-</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a27758c0370ac3911bb0b3665c008cb9a" id="r_a27758c0370ac3911bb0b3665c008cb9a"><td class="memItemLeft" align="right" valign="top"><a id="a27758c0370ac3911bb0b3665c008cb9a" name="a27758c0370ac3911bb0b3665c008cb9a"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>temperature</b></td></tr>
+<tr class="memdesc:a27758c0370ac3911bb0b3665c008cb9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">temperature in degC <br /></td></tr>
+<tr class="separator:a27758c0370ac3911bb0b3665c008cb9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a740895942014d669ab95572e50b5ff71" id="r_a740895942014d669ab95572e50b5ff71"><td class="memItemLeft" align="right" valign="top"><a id="a740895942014d669ab95572e50b5ff71" name="a740895942014d669ab95572e50b5ff71"></a>
+uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>humidity</b></td></tr>
+<tr class="memdesc:a740895942014d669ab95572e50b5ff71"><td class="mdescLeft">&#160;</td><td class="mdescRight">humidity in % <br /></td></tr>
+<tr class="separator:a740895942014d669ab95572e50b5ff71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64b356a055c0d3d91e0ad97e48e07f12" id="r_a64b356a055c0d3d91e0ad97e48e07f12"><td class="memItemLeft" align="right" valign="top"><a id="a64b356a055c0d3d91e0ad97e48e07f12" name="a64b356a055c0d3d91e0ad97e48e07f12"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>valid</b></td></tr>
+<tr class="memdesc:a64b356a055c0d3d91e0ad97e48e07f12"><td class="mdescLeft">&#160;</td><td class="mdescRight">data valid <br /></td></tr>
+<tr class="separator:a64b356a055c0d3d91e0ad97e48e07f12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/<a class="el" href="_mqtt_interface_8h_source.html">MqttInterface.h</a></li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="struct_mqtt_hist_q_data.html">MqttHistQData</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
