@@ -3,7 +3,7 @@ var NAVTREEINDEX0 =
 "_ble_sensors_8h_source.html":[1,0,0,0,0],
 "_local_interface_8h_source.html":[1,0,0,15],
 "_mqtt_interface_8h_source.html":[1,0,0,16],
-"_weather_symbols_8h_source.html":[1,0,0,17],
+"_weather_symbols_8h_source.html":[1,0,0,18],
 "annotated.html":[0,0],
 "class_ble_sensors.html":[0,0,2],
 "class_ble_sensors.html#a02b6268f0eb8262bd19d4647b34fd588":[0,0,2,3],
@@ -101,5 +101,6 @@ var NAVTREEINDEX0 =
 "struct_mqtt_s.html#ae026bf9999242cce7dd77eaf5b3532ef":[0,0,9,18],
 "struct_mqtt_s.html#af889c45c276546ec89b0a3bd70861d36":[0,0,9,2],
 "struct_mqtt_s.html#af89042f9e6faeba65c828e08282f9b0f":[0,0,9,26],
-"struct_mqtt_s.html#afe2ce5d42e8ab698067435593a181500":[0,0,9,12]
+"struct_mqtt_s.html#afe2ce5d42e8ab698067435593a181500":[0,0,9,12],
+"utils_8h_source.html":[1,0,0,17]
 };

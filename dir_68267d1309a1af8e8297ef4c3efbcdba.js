@@ -17,5 +17,6 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "lang_pt.h", "lang__pt_8h_source.html", null ],
     [ "LocalInterface.h", "_local_interface_8h_source.html", null ],
     [ "MqttInterface.h", "_mqtt_interface_8h_source.html", null ],
+    [ "utils.h", "utils_8h_source.html", null ],
     [ "WeatherSymbols.h", "_weather_symbols_8h_source.html", null ]
 ];
