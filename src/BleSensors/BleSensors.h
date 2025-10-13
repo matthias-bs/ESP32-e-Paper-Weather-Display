@@ -11,7 +11,7 @@
 //
 // MIT License
 //
-// Copyright (c) 2023 Matthias Prinke
+// Copyright (c) 2025 Matthias Prinke
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,13 +36,19 @@
 //
 // 20230211 Created
 // 20240417 Added additional constructor and method setAddresses()
-// 20240427 Added paramter activeScan to getData()
+// 20240427 Added parameter activeScan to getData()
 // 20250121 Updated for NimBLE-Arduino v2.x
+// 20250808 Added specific logging macros in scan callback to avoid WDT reset
+// 20250926 Changed getData() to return number of known sensors found
 //
 // ToDo:
-// - 
+// -
 //
 ///////////////////////////////////////////////////////////////////////////////
+
+/*! \file BleSensors.h
+ *  \brief Wrapper class for Theeengs Decoder (https://github.com/theengs/decoder)
+ */
 
 #if !defined(BLE_SENSORS) && !defined(ARDUINO_ADAFRUIT_FEATHER_ESP32S2) \
                           && !defined(ARDUINO_ARCH_RP2040)
@@ -51,6 +57,26 @@
 #include <Arduino.h>
 #include <NimBLEDevice.h>       //!< https://github.com/h2zero/NimBLE-Arduino
 #include <decoder.h>            //!< https://github.com/theengs/decoder
+
+// Extensive logging in the callback may lead to a watchdog reset
+// see 
+// https://github.com/h2zero/NimBLE-Arduino/issues/329
+// https://github.com/h2zero/NimBLE-Arduino/issues/351
+
+//#define CB_LOGGING
+#if defined(CB_LOGGING)
+#define cb_log_i log_i //!< Info
+#define cb_log_w log_w //!< Warn
+#define cb_log_d log_d //!< Debug
+#define cb_log_e log_e //!< Error
+#define cb_log_v log_v //!< Verbose
+#else
+#define cb_log_i {} //!< Info
+#define cb_log_w {} //!< Warn
+#define cb_log_d {} //!< Debug
+#define cb_log_e {} //!< Error
+#define cb_log_v {} //!< Verbose
+#endif
 
 /*!
  * \brief BLE sensor data
@@ -113,21 +139,23 @@ class BleSensors {
          * 
          * \param duration     Scan duration in seconds
          * \param activeScan   0: passive scan / 1: active scan
-         */                
+         * 
+         * \return Number of known sensors found (max. size of known_sensors vector)
+         */
         unsigned getData(uint32_t duration, bool activeScan = true);
         
         /*!
          * \brief Set sensor data invalid.
-         */                        
+         */
         void resetData(void);
         
         /*!
          * \brief Sensor data.
          */
-        std::vector<ble_sensors_t>  data;
+        std::vector<ble_sensors_t> data;
         
     protected:
         std::vector<std::string> _known_sensors; /// MAC addresses of known sensors
         NimBLEScan*              _pBLEScan;      /// NimBLEScan object
 };
-#endif // !defined(BLE_SENSORS) && !defined(ARDUINO_ADAFRUIT_FEATHER_ESP32S2) && !defined(ARDUINO_ARCH_RP2040)
+#endif
