@@ -35,7 +35,7 @@
 // 20241010 Extracted from Waveshare_7_5_T7_Sensors.ino
 // 20250308 Updated NimBLE-Arduino to v2.2.3
 // 20250725 Replaced BLE code by src/BleSensors/BleSensors.h/.cpp
-// 20250728 Fixed compilation with MITHERMOMETER_EN
+// 20251013 Updated SCD4x driver
 //
 // ToDo:
 // -
@@ -47,6 +47,13 @@
 extern bool TouchTriggered();
 
 extern local_sensors_t LocalSensors;
+
+// Sensirion macro definitions
+// Make sure that we use the proper definition of NO_ERROR
+#ifdef NO_ERROR
+#undef NO_ERROR
+#endif
+#define NO_ERROR 0
 
 #if defined(MITHERMOMETER_EN) || defined(THEENGSDECODER_EN)
 static const int bleScanTime = 31; //!< BLE scan time in seconds
@@ -74,41 +81,42 @@ void LocalInterface::GetLocalData(void)
 #ifdef SCD4X_EN
   SensirionI2cScd4x scd4x;
 
-  uint16_t error;
-  char errorMessage[256];
+  int16_t error;
+  char errorMessage[64];
 
   scd4x.begin(myWire, SCD41_I2C_ADDR_62);
+  
+  // Ensure sensor is in clean state
+  delay(30);
+  error = scd4x.wakeUp();
+  if (error != NO_ERROR) {
+    errorToString(error, errorMessage, sizeof(errorMessage));
+    log_e("Error trying to execute wakeUp(): %s", errorMessage);
+  }
 
   // stop potential previously started measurement
   error = scd4x.stopPeriodicMeasurement();
-  if (error)
+  if (error != NO_ERROR)
   {
-    errorToString(error, errorMessage, 256);
+    errorToString(error, errorMessage, sizeof(errorMessage));
     log_e("Error trying to execute stopPeriodicMeasurement(): %s", errorMessage);
   }
 
   // Start Measurement
   error = scd4x.measureSingleShot();
-  if (error)
+  if (error != NO_ERROR)
   {
-    errorToString(error, errorMessage, 256);
+    errorToString(error, errorMessage, sizeof(errorMessage));
     log_e("Error trying to execute measureSingleShot(): %s", errorMessage);
   }
 
   log_d("First measurement takes ~5 sec...");
 #endif
 
-  // BLE Temperature/Humidity Sensors
-#if defined(MITHERMOMETER_EN)
-  float div = 100.0;
-#elif defined(THEENGSDECODER_EN)
-  float div = 1.0;
-#endif
-
 #ifdef MITHERMOMETER_EN
   // Setup BLE Temperature/Humidity Sensors
   ATC_MiThermometer miThermometer(knownBLEAddresses); //!< Mijia Bluetooth Low Energy Thermo-/Hygrometer
-  miThermometer.begin(bleScanMode);
+  miThermometer.begin();
 
   // Set sensor data invalid
   miThermometer.resetData();
@@ -119,13 +127,19 @@ void LocalInterface::GetLocalData(void)
   if (miThermometer.data[0].valid)
   {
     LocalSensors.ble_thsensor[0].valid = true;
-    LocalSensors.ble_thsensor[0].temperature = miThermometer.data[0].temperature / div;
-    LocalSensors.ble_thsensor[0].humidity = miThermometer.data[0].humidity / div;
+    LocalSensors.ble_thsensor[0].temperature = miThermometer.data[0].temperature / 100.0;
+    LocalSensors.ble_thsensor[0].humidity = miThermometer.data[0].humidity / 100.0;
     LocalSensors.ble_thsensor[0].batt_level = miThermometer.data[0].batt_level;
   }
   miThermometer.clearScanResults();
 #endif
 
+ // BLE Temperature/Humidity Sensors
+#if defined(MITHERMOMETER_EN)
+  float div = 100.0;
+#elif defined(THEENGSDECODER_EN)
+  float div = 1.0;
+#endif
 
 #ifdef THEENGSDECODER_EN
   bleSensors = BleSensors(KNOWN_BLE_ADDRESSES);
@@ -196,9 +210,9 @@ void LocalInterface::GetLocalData(void)
   if (LocalSensors.i2c_thpsensor[0].valid)
   {
     error = scd4x.setAmbientPressure((uint16_t)LocalSensors.i2c_thpsensor[0].pressure);
-    if (error)
+    if (error != NO_ERROR)
     {
-      errorToString(error, errorMessage, 256);
+      errorToString(error, errorMessage, sizeof(errorMessage));
       log_e("Error trying to execute setAmbientPressure(): %s", errorMessage);
     }
   }
@@ -208,9 +222,9 @@ void LocalInterface::GetLocalData(void)
   for (int i = 0; i < 50; i++)
   {
     error = scd4x.getDataReadyStatus(isDataReady);
-    if (error)
+    if (error != NO_ERROR)
     {
-      errorToString(error, errorMessage, 256);
+      errorToString(error, errorMessage, sizeof(errorMessage));
       log_e("Error trying to execute getDataReadyFlag(): %s", errorMessage);
     }
     if (error || isDataReady)
@@ -220,12 +234,12 @@ void LocalInterface::GetLocalData(void)
     delay(100);
   }
 
-  if (isDataReady && !error)
+  if (isDataReady && (error == NO_ERROR))
   {
     error = scd4x.readMeasurement(LocalSensors.i2c_co2sensor.co2, LocalSensors.i2c_co2sensor.temperature, LocalSensors.i2c_co2sensor.humidity);
-    if (error)
+    if (error != NO_ERROR)
     {
-      errorToString(error, errorMessage, 256);
+      errorToString(error, errorMessage, sizeof(errorMessage));
       log_e("Error trying to execute readMeasurement(): %s", errorMessage);
     }
     else if (LocalSensors.i2c_co2sensor.co2 == 0)
