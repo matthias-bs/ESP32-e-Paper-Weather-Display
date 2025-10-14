@@ -10,7 +10,7 @@
 //
 // MIT License
 //
-// Copyright (c) 2024 Matthias Prinke
+// Copyright (c) 2025 Matthias Prinke
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +37,7 @@
 // 20241011 Added secure WiFi
 // 20250310 Added AUTO_DISCOVERY (Home Assistant)
 // 20250725 Added define for selection of JSON payload variant (TTN/Helium)
+// 20251014 Removed GMT_OFFSET_SEC/DAYLIGHT_OFFSET_SEC
 //
 // ToDo:
 // -
@@ -100,8 +101,6 @@
                                                            // EU "0.europe.pool.ntp.org"
                                                            // US "0.north-america.pool.ntp.org"
                                                            // See: https://www.ntppool.org/en/                                                           
-#define GMT_OFFSET_SEC 0                                   // UK normal time is GMT, so GMT Offset is 0, for US (-5Hrs) is typically -18000, AU is typically (+8hrs) 28800
-#define DAYLIGHT_OFFSET_SEC 3600                           // In the UK DST is +1hr or 3600-secs, other countries may use 2hrs 7200 or 30-mins 1800 or 5.5hrs 19800 Ahead of GMT use + offset behind - offset
 
 // Example time zones
 // "MET-1METDST,M3.5.0/01,M10.5.0/02"; // Most of Europe
