@@ -9,7 +9,7 @@
 //
 // MIT License
 //
-// Copyright (c) 2024 Matthias Prinke
+// Copyright (c) 2025 Matthias Prinke
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +34,7 @@
 //
 // 20241010 Extracted from Waveshare_7_5_T7_Sensors.ino
 // 20250725 Added unixMillisToIso8601()
+// 20251014 Removed GMT_OFFSET_SEC/DAYLIGHT_OFFSET_SEC from configTime() call
 //
 // ToDo:
 // -
@@ -149,9 +150,9 @@ String unixMillisToIso8601(uint64_t ms) {
 // Get time from NTP server and initialize/update RTC
 boolean SetupTime()
 {
-  configTime(GMT_OFFSET_SEC, DAYLIGHT_OFFSET_SEC, NTPSERVER, "pool.ntp.org"); // (gmtOffset_sec, daylightOffset_sec, ntpServer)
-  setenv("TZ", TIMEZONE, 1);                                                  // setenv() adds the "TZ" variable to the environment with a value TimeZone, only used if set to 1, 0 means no change
-  tzset();                                                                    // Set the TZ environment variable
+  configTime(0, 0, NTPSERVER, "pool.ntp.org"); // (gmtOffset_sec, daylightOffset_sec, ntpServer)
+  setenv("TZ", TIMEZONE, 1);                   // setenv() adds the "TZ" variable to the environment with a value TimeZone, only used if set to 1, 0 means no change
+  tzset();                                     // Set the TZ environment variable
   delay(100);
   return UpdateLocalTime();
 }
