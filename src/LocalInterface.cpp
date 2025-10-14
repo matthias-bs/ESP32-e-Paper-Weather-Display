@@ -36,6 +36,8 @@
 // 20250308 Updated NimBLE-Arduino to v2.2.3
 // 20250725 Replaced BLE code by src/BleSensors/BleSensors.h/.cpp
 // 20251013 Updated SCD4x driver
+// 20251014 Changed bleSensors to local variable
+//          Added TouchTriggered to CTOR as callback to abort BLE scanning
 //
 // ToDo:
 // -
@@ -59,11 +61,6 @@ extern local_sensors_t LocalSensors;
 static const int bleScanTime = 31; //!< BLE scan time in seconds
 static const int bleScanMode = 1;  //!< BLE scan mode: 0=passive, 1=active
 static std::vector<std::string> knownBLEAddresses = KNOWN_BLE_ADDRESSES;
-#endif
-
-#ifdef THEENGSDECODER_EN
-/// Bluetooth Low Energy sensors
-BleSensors bleSensors;
 #endif
 
 // Get local sensor data
@@ -142,7 +139,7 @@ void LocalInterface::GetLocalData(void)
 #endif
 
 #ifdef THEENGSDECODER_EN
-  bleSensors = BleSensors(KNOWN_BLE_ADDRESSES);
+  BleSensors bleSensors = BleSensors(KNOWN_BLE_ADDRESSES, &TouchTriggered);
   if (bleSensors.data.size() > 0)
   {
     bleSensors.getData(bleScanTime, bleScanMode);
