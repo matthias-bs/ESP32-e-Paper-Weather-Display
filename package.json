@@ -29,6 +29,6 @@
     "pocketBME280": "angrest/pocketBME280#semver:^1.2.4",
     "NimBLE-Arduino": "h2zero/NimBLE-Arduino#semver:^2.3.6",
     "Sensirion I2C SCD4x": "Sensirion/arduino-i2c-scd4x#semver:^1.1.0",
-    "Sensirion Core": "Sensirion/arduino-core#semver:^0.7.1"
+    "Sensirion Core": "Sensirion/arduino-core#semver:^0.7.2"
   }
 }
