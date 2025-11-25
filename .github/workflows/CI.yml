@@ -72,7 +72,7 @@ jobs:
             "pocketBME280@1.2.4"
             "NimBLE-Arduino@2.3.6"
             "Sensirion I2C SCD4x@1.1.0"
-            "Sensirion Core@0.7.1"
+            "Sensirion Core@0.7.2"
           )
           for i in "${required_libs[@]}"
           do
