@@ -68,7 +68,7 @@ jobs:
             "U8g2_for_Adafruit_GFX@1.8.0"
             "cQueue@2.0"
             "TheengsDecoder@2.0.0"
-            "ArduinoJson@7.4.2"
+            "ArduinoJson@7.4.3"
             "pocketBME280@1.2.4"
             "NimBLE-Arduino@2.3.6"
             "Sensirion I2C SCD4x@1.1.0"
