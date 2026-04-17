@@ -24,7 +24,7 @@
     "U8g2_for_Adafruit_GFX": "olikraus/U8g2_for_Adafruit_GFX#semver:^1.8.0",
     "cQueue": "SMFSW/cQueue#semver:^2.1",
     "TheengsDecoder": "theengs/decoder#semver:^2.0.0",
-    "arduino-mqtt": "256dpi/arduino-mqtt#semver:^2.5.2",
+    "arduino-mqtt": "256dpi/arduino-mqtt#semver:^2.5.3",
     "ArduinoJson": "bblanchon/ArduinoJson#semver:^7.4.3",
     "pocketBME280": "angrest/pocketBME280#semver:^1.2.4",
     "NimBLE-Arduino": "h2zero/NimBLE-Arduino#semver:^2.3.9",
