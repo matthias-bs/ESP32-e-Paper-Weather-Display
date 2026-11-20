@@ -8,6 +8,6 @@ var searchData=
   ['ble_5fsensors_5',['BLE_SENSORS',['../_ble_sensors_8h.html#afe7b10510698e2f90c005470e4310cb9',1,'BleSensors.h']]],
   ['ble_5fsensors_5ft_6',['ble_sensors_t',['../_ble_sensors_8h.html#aabeec3c2c34590507ead85e2297be92c',1,'BleSensors.h']]],
   ['bledatas_7',['BleDataS',['../struct_ble_data_s.html',1,'']]],
-  ['blesensors_8',['blesensors',['../class_ble_sensors.html',1,'BleSensors'],['../class_ble_sensors.html#a53cb2a0c16f658f9928f79fa1d1ce04b',1,'BleSensors::BleSensors(std::vector&lt; std::string &gt; known_sensors, bool(*stopScanCb)()=nullptr)'],['../class_ble_sensors.html#ae99963052eaa938368fb0c5330972a42',1,'BleSensors::BleSensors(bool(*stopScanCb)()=nullptr)']]],
+  ['blesensors_8',['BleSensors',['../class_ble_sensors.html',1,'BleSensors'],['../class_ble_sensors.html#a53cb2a0c16f658f9928f79fa1d1ce04b',1,'BleSensors::BleSensors(std::vector&lt; std::string &gt; known_sensors, bool(*stopScanCb)()=nullptr)'],['../class_ble_sensors.html#ae99963052eaa938368fb0c5330972a42',1,'BleSensors::BleSensors(bool(*stopScanCb)()=nullptr)']]],
   ['blesensors_2eh_9',['BleSensors.h',['../_ble_sensors_8h.html',1,'']]]
 ];

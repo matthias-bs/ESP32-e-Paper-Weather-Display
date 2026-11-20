@@ -8,7 +8,7 @@ var searchData=
   ['m_5fstopscancb_5',['m_stopScanCb',['../class_ble_sensors_callbacks_1_1_scan_callbacks.html#aecb2d3bd95a49847b99cbc81e3b4b431',1,'BleSensorsCallbacks::ScanCallbacks']]],
   ['mqttconnect_6',['mqttConnect',['../class_mqtt_interface.html#a7f6dfadc938c398ab985438a664a2bc4',1,'MqttInterface']]],
   ['mqtthistqdata_7',['MqttHistQData',['../struct_mqtt_hist_q_data.html',1,'']]],
-  ['mqttinterface_8',['mqttinterface',['../class_mqtt_interface.html',1,'MqttInterface'],['../class_mqtt_interface.html#a9e33170c0c3797785d0e07b1fbebd209',1,'MqttInterface::MqttInterface()']]],
+  ['mqttinterface_8',['MqttInterface',['../class_mqtt_interface.html',1,'MqttInterface'],['../class_mqtt_interface.html#a9e33170c0c3797785d0e07b1fbebd209',1,'MqttInterface::MqttInterface()']]],
   ['mqtts_9',['MqttS',['../struct_mqtt_s.html',1,'']]],
   ['mqttuplink_10',['mqttUplink',['../class_mqtt_interface.html#a9424ff21634670d5046f01e31be87cd3',1,'MqttInterface']]]
 ];
